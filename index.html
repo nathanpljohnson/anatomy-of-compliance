@@ -2853,6 +2853,344 @@
     .firmwide-brief .atlas-detail-head,
     .firmwide-brief .atlas-detail-body { padding-inline: 0; }
 
+    /* Version B — the same atlas with a quieter editorial interface and stronger route guidance. */
+    body[data-version="b"] {
+      --footer-reserve: 44px;
+    }
+
+    body[data-version="b"] .explorer .section-tag {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .74rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    body[data-version="b"] .atlas-path-tools {
+      position: sticky;
+      z-index: 24;
+      top: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: .9rem;
+      padding: .65rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line-strong);
+      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      backdrop-filter: blur(8px);
+    }
+
+    body[data-version="b"] .atlas-pathbar {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .atlas-path-step {
+      flex: 0 0 auto;
+      padding: .28rem .15rem;
+      border: 0;
+      border-bottom: 1px solid transparent;
+      color: var(--muted);
+      background: transparent;
+      font-family: var(--sans);
+      font-size: .76rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .atlas-path-step:hover,
+    .atlas-path-step:focus-visible {
+      border-bottom-color: currentColor;
+      color: var(--ink);
+    }
+
+    .atlas-path-step[aria-current="location"] {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .atlas-path-step:not(:last-child)::after {
+      margin-left: .55rem;
+      color: var(--signal);
+      content: "→";
+    }
+
+    .atlas-copy-path {
+      min-width: 86px;
+      padding: .45rem .65rem;
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+      background: transparent;
+      font-family: var(--sans);
+      font-size: .7rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .atlas-copy-path:hover { border-color: var(--ink); background: var(--white); }
+
+    .atlas-copy-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    .atlas-scroll-wrap { position: relative; }
+    .atlas-swipe-hint { display: none; }
+
+    body[data-version="b"] .atlas-scroll {
+      scroll-padding-inline: 1rem;
+      scrollbar-color: var(--line-strong) transparent;
+    }
+
+    body[data-version="b"] .atlas-column-head {
+      justify-content: flex-start;
+      min-height: 36px;
+      padding-inline: 0;
+      color: var(--ink);
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    body[data-version="b"] .atlas-node {
+      min-height: 60px;
+      padding: 11px 30px 11px 12px;
+      color: var(--muted);
+      background: transparent;
+      transition: color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+    }
+
+    body[data-version="b"] .atlas-node strong {
+      color: inherit;
+      font-family: var(--sans);
+      font-size: .84rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    body[data-version="b"] .atlas-node:hover {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--white) 72%, transparent);
+    }
+
+    body[data-version="b"] .atlas-node[aria-pressed="true"] {
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: inset 4px 0 var(--signal), 0 0 0 1px var(--ink);
+    }
+
+    body[data-version="b"] .atlas-node-meta {
+      display: flex;
+      align-items: center;
+      gap: .38rem;
+      margin-bottom: .3rem;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .66rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.2;
+      text-transform: none;
+    }
+
+    body[data-version="b"] .atlas-node-meta .status-dot {
+      flex: 0 0 auto;
+      width: 7px;
+      height: 7px;
+      margin: 0;
+    }
+
+    body[data-version="b"] .atlas-node-unavailable-wrap { position: relative; }
+
+    body[data-version="b"] .atlas-node-unavailable {
+      color: var(--faint) !important;
+      cursor: help;
+      opacity: .64;
+    }
+
+    body[data-version="b"] .atlas-unavailable-tooltip {
+      position: absolute;
+      z-index: 8;
+      top: calc(100% + 5px);
+      left: 0;
+      width: min(230px, 78vw);
+      padding: .55rem .65rem;
+      border: 1px solid var(--ink);
+      color: var(--white);
+      background: var(--ink);
+      font-size: .7rem;
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-3px);
+      transition: opacity 120ms ease, transform 120ms ease;
+    }
+
+    body[data-version="b"] .atlas-node-unavailable:hover + .atlas-unavailable-tooltip,
+    body[data-version="b"] .atlas-node-unavailable:focus-visible + .atlas-unavailable-tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    body[data-version="b"] .atlas-definition-toggle {
+      opacity: 0;
+      transition: opacity 120ms ease, color 120ms ease, background-color 120ms ease;
+    }
+
+    body[data-version="b"] .atlas-node-entry:hover .atlas-definition-toggle,
+    body[data-version="b"] .atlas-node-entry:focus-within .atlas-definition-toggle,
+    body[data-version="b"] .atlas-node-entry.is-selected .atlas-definition-toggle,
+    body[data-version="b"] .atlas-definition-toggle[aria-expanded="true"] {
+      opacity: 1;
+    }
+
+    body[data-version="b"] .atlas-definition-label,
+    body[data-version="b"] .atlas-definition-source {
+      font-family: var(--sans);
+      font-size: .67rem;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    body[data-version="b"] .atlas-definition p {
+      font-size: .8rem;
+      line-height: 1.48;
+    }
+
+    body[data-version="b"] .atlas-connector {
+      stroke: var(--signal);
+      stroke-width: 2;
+      opacity: 1;
+    }
+
+    body[data-version="b"] .atlas-connector.secondary {
+      stroke: var(--line-strong);
+      stroke-width: 1;
+      stroke-dasharray: 2 6;
+      opacity: .18;
+    }
+
+    body[data-version="b"] .atlas-detail {
+      width: 315px;
+      max-height: min(650px, calc(100dvh - var(--footer-reserve) - 32px));
+      border-top-width: 3px;
+      animation: atlas-detail-enter 160ms ease-out;
+    }
+
+    body[data-version="b"] .atlas-detail-head {
+      padding: 1.2rem 1.25rem 1rem;
+    }
+
+    body[data-version="b"] .atlas-detail-kicker,
+    body[data-version="b"] .atlas-detail-label {
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.25;
+      text-transform: none;
+    }
+
+    body[data-version="b"] .atlas-detail-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: .8rem;
+      margin: .45rem 0 .5rem;
+    }
+
+    body[data-version="b"] .atlas-detail-title-row h3 {
+      margin: 0;
+      font-size: 1.78rem;
+      line-height: 1.03;
+    }
+
+    body[data-version="b"] .atlas-detail-status {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: .38rem;
+      margin-top: .15rem;
+      padding: .3rem .45rem;
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: .65rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    body[data-version="b"] .atlas-detail-status .status-dot { margin: 0; }
+
+    body[data-version="b"] .atlas-detail-head p,
+    body[data-version="b"] .atlas-detail-field p {
+      max-width: 42ch;
+    }
+
+    body[data-version="b"] .atlas-detail-field { padding: .9rem 0; }
+    body[data-version="b"] .detail-source { font-family: var(--sans); font-size: .65rem; }
+    body[data-version="b"] .practice-status {
+      border-radius: 0;
+      font-family: var(--sans);
+      font-size: .65rem;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    body[data-version="b"] .reading-note h2 {
+      font-family: var(--sans);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    body[data-version="b"] footer .footer-inner {
+      min-height: 44px;
+      padding: .55rem 0;
+    }
+
+    body[data-version="b"] footer .footer-title { font-size: .86rem; }
+    body[data-version="b"] footer .footer-meta { font-size: .64rem; }
+    body[data-version="b"] footer .footer-meta span { display: none; }
+
+    /* Final atlas treatment: guided interaction with a roomier editorial measure. */
+    body[data-atlas-variant="c"] .atlas-path-tools {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    body[data-atlas-variant="c"] .atlas-column-head {
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    body[data-atlas-variant="c"] .atlas-column-head span {
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    body[data-atlas-variant="c"] .atlas-detail {
+      width: 365px;
+    }
+
+    body[data-atlas-variant="c"] .instructions-share {
+      display: none;
+    }
+
+    @keyframes atlas-detail-enter {
+      from { opacity: 0; transform: translateX(5px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
     @media (max-width: 900px) {
       :root { --footer-reserve: 76px; }
       .explorer-heading { grid-template-columns: 1fr; }
@@ -2906,14 +3244,117 @@
       .atlas-toolbar span { display: none; }
       .atlas-toolbar-actions { justify-self: end; }
       .reading-note { grid-template-columns: 1fr; gap: .45rem; }
-      .version-options button { display: block; min-width: 62px; padding-inline: .6rem; }
-      .version-options button b { display: block; }
-      .version-options button span { display: none; }
       .desk-family .desk-choice-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .desk-evidence .desk-choice-list { grid-template-columns: 1fr; }
       .atlas-scroll { padding-left: 0; }
       .atlas-canvas { width: 1415px; }
       .atlas-detail { max-height: 590px; }
+
+      body[data-version="b"] {
+        --footer-reserve: 58px;
+        overflow-x: clip;
+      }
+
+      body[data-version="b"] .explorer {
+        padding-top: .9rem;
+      }
+
+      body[data-version="b"] .explorer-heading {
+        display: block;
+        margin-bottom: .9rem;
+      }
+
+      body[data-version="b"] .explorer .section-tag {
+        margin-bottom: .35rem;
+        font-size: .66rem;
+      }
+
+      body[data-version="b"] .explorer-heading h1 {
+        max-width: 15ch;
+        font-size: clamp(2rem, 9vw, 2.45rem);
+        line-height: .94;
+      }
+
+      body[data-version="b"] .explorer-heading > p {
+        max-width: 44ch;
+        margin-top: .6rem;
+        font-size: .88rem;
+        line-height: 1.35;
+      }
+
+      body[data-version="b"] .atlas-toolbar {
+        grid-template-columns: 1fr;
+        gap: .6rem;
+      }
+
+      body[data-version="b"] .atlas-toolbar-actions {
+        justify-self: stretch;
+      }
+
+      body[data-version="b"] .atlas-instructions,
+      body[data-version="b"] .atlas-reset { flex: 1; min-width: 0; }
+
+      body[data-version="b"] .atlas-path-tools {
+        grid-template-columns: minmax(0, 1fr) auto;
+        margin-bottom: .55rem;
+        padding: .45rem 0;
+      }
+
+      body[data-version="b"] .atlas-copy-path { min-width: 72px; }
+
+      body[data-version="b"] .atlas-swipe-hint {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 0 .35rem;
+        color: var(--muted);
+        font-size: .72rem;
+      }
+
+      body[data-version="b"] .atlas-swipe-hint strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      body[data-version="b"] .atlas-scroll-wrap::after {
+        position: absolute;
+        z-index: 6;
+        top: 2rem;
+        right: 0;
+        bottom: 1.5rem;
+        width: 28px;
+        background: linear-gradient(90deg, transparent, var(--paper));
+        content: "";
+        pointer-events: none;
+      }
+
+      body[data-version="b"] .atlas-scroll {
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 0;
+        overscroll-behavior-inline: contain;
+      }
+
+      body[data-version="b"] .atlas-column,
+      body[data-version="b"] .atlas-detail {
+        scroll-snap-align: start;
+      }
+
+      body[data-version="b"] .atlas-detail {
+        width: 330px;
+        max-height: 590px;
+      }
+
+      body[data-atlas-variant="c"] .atlas-detail {
+        width: 330px;
+      }
+
+      body[data-version="b"] footer .footer-inner {
+        min-height: 58px;
+      }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      body[data-version="b"] .atlas-definition-toggle { opacity: 1; }
     }
 
     @media (forced-colors: active) {
@@ -2942,7 +3383,7 @@
           <p class="section-tag">The Anatomy of Compliance · Interactive field guide</p>
           <h1 id="explorer-title">Trace a regulatory branch</h1>
         </div>
-        <p>AI regulation costs more than paperwork. This atlas shows where each rule could slow development, consume scarce resources, or change products—and how much labs would have to change to comply.</p>
+        <p>AI regulation costs more than just paperwork. This map shows where each rule could slow development, consume scarce resources, or change products. It also compares each rule with current lab practices, showing how much labs may need to change to comply.</p>
       </div>
 
       <div class="atlas-toolbar">
@@ -2967,7 +3408,6 @@
       <p class="footer-title">The Anatomy of Compliance</p>
       <div class="footer-meta">
         <button class="footer-about" type="button" data-open-about>About the paper</button>
-        <span>Source: “The Anatomy of Compliance” research manuscript</span>
         <span>Interpretive companion, not legal advice</span>
       </div>
     </div>
@@ -3887,13 +4327,18 @@
       "All stages covered by the qualifying standard": "The affected stages depend on the scope of the standard used by the rule."
     };
 
-    const state = { family: 0, subtype: 0, evidence: "effects", breakdown: 0, part: 0 };
+    const state = { version: "c", family: 0, subtype: 0, evidence: "effects", breakdown: 0, part: 0 };
     const flowStage = document.querySelector("#flow-stage");
+    let atlasScroll;
     let atlasCanvas;
     let atlasColumns;
     let atlasSvg;
     let atlasDetail;
     let activeStep = 0;
+    let pendingPanKey = null;
+    let atlasScrollFrame = 0;
+
+    function usesEditorialAtlas() { return state.version === "b" || state.version === "c"; }
 
     function currentItem() { return families[state.family].items[state.subtype]; }
 
@@ -3935,7 +4380,7 @@
       const levels = [
         { key: "family", label: "Family", items: families.map(family => family.name), selected: state.family },
         { key: "subtype", label: "Subtype", items: families[state.family].items.map(entry => entry.name), selected: state.subtype },
-        { key: "evidence", label: "Evidence", items: evidenceBranches.map(branch => branch.name), selected: evidenceBranches.findIndex(branch => branch.id === state.evidence) },
+        { key: "evidence", label: usesEditorialAtlas() ? "View" : "Evidence", items: evidenceBranches.map(branch => branch.name), selected: evidenceBranches.findIndex(branch => branch.id === state.evidence) },
         { key: "breakdown", label: breakdownLabel, items: breakdownItems, selected: state.breakdown }
       ];
       if (state.evidence === "effects" && !item.effects.firmwide) levels.push({
@@ -3950,15 +4395,22 @@
 
     function atlasNode(level, label, index) {
       if (level.available?.[index] === false) {
+        if (usesEditorialAtlas()) {
+          const tooltipId = `unavailable-note-${state.family}-${state.subtype}-${state.breakdown}-${index}`;
+          return `<li class="atlas-node-unavailable-wrap"><button class="atlas-node atlas-node-unavailable" type="button" aria-disabled="true" aria-describedby="${tooltipId}"><strong>${label}</strong></button><span class="atlas-unavailable-tooltip" id="${tooltipId}" role="tooltip">No significant impact was noted for this point in the paper.</span></li>`;
+        }
         return `<li><div class="atlas-node atlas-node-unavailable" aria-label="${label}. No significant impact noted in the paper."><small>— No significant impact noted</small><strong>${label}</strong></div></li>`;
       }
+      const number = usesEditorialAtlas() ? "" : `<small>${String(index + 1).padStart(2, "0")}</small>`;
+      const law = usesEditorialAtlas() && level.key === "breakdown" && state.evidence === "laws" ? currentItem().laws[index] : null;
+      const lawStatus = law ? `<span class="atlas-node-meta"><span class="status-dot ${law[1]}" aria-hidden="true"></span>${law[2]}</span>` : "";
       if (level.key === "subtype") {
         const item = families[state.family].items[index];
         const definitionId = `subtype-definition-${state.family + 1}-${index + 1}`;
         const selectedClass = index === level.selected ? " is-selected" : "";
-        return `<li class="atlas-node-entry${selectedClass}"><button class="atlas-node" type="button" data-key="${level.key}" data-index="${index}" aria-pressed="${index === level.selected}"><small>${String(index + 1).padStart(2, "0")}</small><strong>${label}</strong></button><button class="atlas-definition-toggle" type="button" data-definition-toggle aria-expanded="false" aria-controls="${definitionId}" aria-label="Define ${label}" title="Define ${label}">?</button><div class="atlas-definition" id="${definitionId}" hidden><span class="atlas-definition-label">Paper definition</span><p>${item.description}</p><span class="atlas-definition-source">Paper taxonomy · §2.2.${state.family + 1}</span></div></li>`;
+        return `<li class="atlas-node-entry${selectedClass}"><button class="atlas-node" type="button" data-key="${level.key}" data-index="${index}" aria-pressed="${index === level.selected}">${number}<strong>${label}</strong></button><button class="atlas-definition-toggle" type="button" data-definition-toggle aria-expanded="false" aria-controls="${definitionId}" aria-label="Define ${label}" title="Define ${label}">?</button><div class="atlas-definition" id="${definitionId}" hidden><span class="atlas-definition-label">Definition</span><p>${item.description}</p></div></li>`;
       }
-      return `<li><button class="atlas-node" type="button" data-key="${level.key}" data-index="${index}" aria-pressed="${index === level.selected}"><small>${String(index + 1).padStart(2, "0")}</small><strong>${label}</strong></button></li>`;
+      return `<li><button class="atlas-node" type="button" data-key="${level.key}" data-index="${index}" aria-pressed="${index === level.selected}">${number}${lawStatus}<strong>${label}</strong></button></li>`;
     }
 
     function choose(key, index, advance = false) {
@@ -3973,6 +4425,7 @@
       const lastStep = getLevels().length - 1;
       if (advance) activeStep = Math.min(activeStep + 1, lastStep);
       else activeStep = Math.min(activeStep, lastStep);
+      if (usesEditorialAtlas()) pendingPanKey = key;
       render();
     }
 
@@ -4014,7 +4467,7 @@
     function renderColumns() {
       atlasColumns.innerHTML = getLevels().map((level, index) => `
         <section class="atlas-column" data-level="${index}">
-          <div class="atlas-column-head"><span>0${index + 1}</span><span>${level.label}</span></div>
+          <div class="atlas-column-head">${usesEditorialAtlas() ? `<span>${level.label}</span>` : `<span>0${index + 1}</span><span>${level.label}</span>`}</div>
           <ol class="atlas-node-list">${level.items.map((label, itemIndex) => atlasNode(level, label, itemIndex)).join("")}</ol>
         </section>
       `).join("");
@@ -4026,38 +4479,47 @@
       return `<div class="atlas-mini-tags">${items.map(item => `<span class="atlas-mini-tag">${item === selected ? "● " : ""}${item}</span>`).join("")}</div>`;
     }
 
-    function familyPaperSection(prefix) {
-      return `${prefix}.${state.family + 1}`;
-    }
-
-    function labPaperSection() {
-      const labNumber = Math.max(1, LABS.indexOf(LABS[state.breakdown]) + 1);
-      return `§4.${labNumber}.${state.family + 1}`;
-    }
-
-    function sourceLine(section, label = "Paper source") {
-      return `<div class="detail-source"><span>${label}</span><span>${section}</span></div>`;
-    }
-
-    function detailMarkup() {
+    function detailMarkupB() {
       const item = currentItem();
       if (state.evidence === "laws") {
         const [title, statusClass, status, note] = item.laws[state.breakdown];
-        return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Law or proposal</span><h3>${title}</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="atlas-detail-label">Status in the paper</span><p><span class="status-dot ${statusClass}" aria-hidden="true" style="display:inline-block;margin:0 .45rem 0 0"></span>${status}</p></section><section class="atlas-detail-field"><span class="atlas-detail-label">Requirement</span><p>${note}</p></section><section class="atlas-detail-field">${sourceLine(familyPaperSection("§2.2"))}</section></div>`;
+        return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Law or proposal</span><div class="atlas-detail-title-row"><h3 id="atlas-detail-title">${title}</h3><span class="atlas-detail-status"><span class="status-dot ${statusClass}" aria-hidden="true"></span>${status}</span></div><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><h4 class="atlas-detail-label">What the rule requires</h4><p>${note}</p></section></div>`;
       }
 
       if (state.evidence === "effects") {
         if (item.effects.firmwide) {
-          return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Firm-wide effect</span><h3>Incentives and exposure</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="atlas-detail-label">Paper’s finding</span><p>${item.effects.lede}</p></section><section class="atlas-detail-field"><span class="atlas-detail-label">Scope of analysis</span><p>The paper treats this liability mechanism as a change to general firm behavior rather than assigning it to a single input or production stage.</p></section><section class="atlas-detail-field">${sourceLine(item.effects.section || "§3.7")}</section></div>`;
+          return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Potential effect</span><div class="atlas-detail-title-row"><h3 id="atlas-detail-title">Incentives and exposure</h3></div><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><h4 class="atlas-detail-label">What the paper finds</h4><p>${item.effects.lede}</p></section><section class="atlas-detail-field"><h4 class="atlas-detail-label">Scope</h4><p>The paper treats this liability mechanism as a change to general firm behavior rather than assigning it to a single input or production stage.</p></section></div>`;
         }
         const selectedPoint = effectPoints(state.breakdown)[state.part];
         const selectedNote = item.effects.notes?.[selectedPoint.sourceLabel] || item.effects.lede;
-        return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Potential effect · ${state.breakdown === 0 ? "Input" : "Pipeline stage"}</span><h3>${selectedPoint.label}</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="atlas-detail-label">Effect identified in the paper</span><p>${selectedNote}</p></section><section class="atlas-detail-field"><span class="atlas-detail-label">Overall mechanism</span><p>${item.effects.lede}</p></section><section class="atlas-detail-field">${sourceLine(item.effects.section || familyPaperSection("§3"))}</section></div>`;
+        return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Potential effect · ${state.breakdown === 0 ? "Input" : "Pipeline stage"}</span><div class="atlas-detail-title-row"><h3 id="atlas-detail-title">${selectedPoint.label}</h3></div><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><h4 class="atlas-detail-label">Effect noted in the paper</h4><p>${selectedNote}</p></section><section class="atlas-detail-field"><h4 class="atlas-detail-label">Overall mechanism</h4><p>${item.effects.lede}</p></section></div>`;
       }
 
       const lab = LABS[state.breakdown];
       const practice = item.labs[lab];
-      return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Current developer practice</span><h3>${lab}</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="practice-status ${practice.status}" style="margin:0">${practice.label}</span></section><section class="atlas-detail-field"><span class="atlas-detail-label">Practice described in the paper</span><p>${practice.text}</p></section><section class="atlas-detail-field"><p style="color:var(--muted);font-size:.76rem">Closest public analogue—not a determination that the developer satisfies a legal standard.</p></section><section class="atlas-detail-field">${sourceLine(labPaperSection())}</section></div>`;
+      return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Current lab practice</span><div class="atlas-detail-title-row"><h3 id="atlas-detail-title">${lab}</h3><span class="practice-status ${practice.status}" style="margin:0">${practice.label}</span></div><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><h4 class="atlas-detail-label">Closest public practice</h4><p>${practice.text}</p></section><section class="atlas-detail-field"><p style="color:var(--muted);font-size:.76rem">Closest public analogue identified in the paper—not a determination that the developer satisfies a legal standard.</p></section></div>`;
+    }
+
+    function detailMarkup() {
+      if (usesEditorialAtlas()) return detailMarkupB();
+      const item = currentItem();
+      if (state.evidence === "laws") {
+        const [title, statusClass, status, note] = item.laws[state.breakdown];
+        return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Law or proposal</span><h3>${title}</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="atlas-detail-label">Status in the paper</span><p><span class="status-dot ${statusClass}" aria-hidden="true" style="display:inline-block;margin:0 .45rem 0 0"></span>${status}</p></section><section class="atlas-detail-field"><span class="atlas-detail-label">Requirement</span><p>${note}</p></section></div>`;
+      }
+
+      if (state.evidence === "effects") {
+        if (item.effects.firmwide) {
+          return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Firm-wide effect</span><h3>Incentives and exposure</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="atlas-detail-label">Paper’s finding</span><p>${item.effects.lede}</p></section><section class="atlas-detail-field"><span class="atlas-detail-label">Scope of analysis</span><p>The paper treats this liability mechanism as a change to general firm behavior rather than assigning it to a single input or production stage.</p></section></div>`;
+        }
+        const selectedPoint = effectPoints(state.breakdown)[state.part];
+        const selectedNote = item.effects.notes?.[selectedPoint.sourceLabel] || item.effects.lede;
+        return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Potential effect · ${state.breakdown === 0 ? "Input" : "Pipeline stage"}</span><h3>${selectedPoint.label}</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="atlas-detail-label">Effect identified in the paper</span><p>${selectedNote}</p></section><section class="atlas-detail-field"><span class="atlas-detail-label">Overall mechanism</span><p>${item.effects.lede}</p></section></div>`;
+      }
+
+      const lab = LABS[state.breakdown];
+      const practice = item.labs[lab];
+      return `<div class="atlas-detail-head"><span class="atlas-detail-kicker">Current developer practice</span><h3>${lab}</h3><p>${item.description}</p></div><div class="atlas-detail-body"><section class="atlas-detail-field"><span class="practice-status ${practice.status}" style="margin:0">${practice.label}</span></section><section class="atlas-detail-field"><span class="atlas-detail-label">Practice described in the paper</span><p>${practice.text}</p></section><section class="atlas-detail-field"><p style="color:var(--muted);font-size:.76rem">Closest public analogue—not a determination that the developer satisfies a legal standard.</p></section></div>`;
     }
 
     function renderDetail(target = atlasDetail) {
@@ -4068,25 +4530,133 @@
       return levels.map(level => level.items[level.selected]);
     }
 
+    function sizeVersionBAtlas() {
+      if (!usesEditorialAtlas() || !atlasCanvas || !atlasColumns) return;
+      const mobile = matchMedia("(max-width: 760px)").matches;
+      const count = getLevels().length;
+      const roomy = state.version === "c" && !mobile;
+      const columnWidth = mobile ? 230 : roomy ? 180 : 156;
+      const gap = mobile ? 18 : roomy ? 28 : 18;
+      const detailWidth = mobile ? 330 : roomy ? 365 : 315;
+      const detailGap = mobile ? 24 : roomy ? 28 : 22;
+      const columnsWidth = count * columnWidth + Math.max(0, count - 1) * gap;
+      atlasColumns.style.gridTemplateColumns = `repeat(${count}, ${columnWidth}px)`;
+      atlasColumns.style.gap = `${gap}px`;
+      atlasColumns.style.width = `${columnsWidth}px`;
+      atlasCanvas.style.width = `${columnsWidth + detailGap + detailWidth}px`;
+    }
+
+    function scrollAtlasTargetIntoView(target, align = "nearest") {
+      if (!atlasScroll || !target) return;
+      const viewport = atlasScroll.getBoundingClientRect();
+      const box = target.getBoundingClientRect();
+      const motion = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+      let delta = 0;
+      if (align === "start") delta = box.left - viewport.left;
+      else if (box.right > viewport.right - 10) delta = box.right - viewport.right + 18;
+      else if (box.left < viewport.left + 10) delta = box.left - viewport.left - 18;
+      if (Math.abs(delta) > 2) atlasScroll.scrollBy({ left: delta, behavior: motion });
+    }
+
+    function panVersionB(key) {
+      if (!usesEditorialAtlas() || !key) return;
+      const levels = getLevels();
+      const columns = [...atlasColumns.querySelectorAll(".atlas-column")];
+      const mobile = matchMedia("(max-width: 760px)").matches;
+      if (mobile) {
+        const levelIndex = levels.findIndex(level => level.key === key);
+        const target = key === "part" || levelIndex === levels.length - 1 ? atlasDetail : columns[Math.min(levelIndex + 1, columns.length - 1)];
+        const motion = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+        atlasScroll.scrollTo({ left: Math.max(0, target.offsetLeft), behavior: motion });
+        return;
+      }
+      if (["evidence", "breakdown", "part"].includes(key)) scrollAtlasTargetIntoView(atlasDetail);
+    }
+
+    function updateSwipeHint() {
+      if (!usesEditorialAtlas() || !atlasScroll) return;
+      const hint = flowStage.querySelector("[data-swipe-step]");
+      if (!hint) return;
+      const stops = [...atlasColumns.querySelectorAll(".atlas-column"), atlasDetail];
+      const viewport = atlasScroll.getBoundingClientRect();
+      const edge = viewport.left + 16;
+      let closest = 0;
+      let distance = Infinity;
+      stops.forEach((stop, index) => {
+        const nextDistance = Math.abs(stop.getBoundingClientRect().left - edge);
+        if (nextDistance < distance) { distance = nextDistance; closest = index; }
+      });
+      const labels = [...getLevels().map(level => level.label), "Finding"];
+      hint.textContent = `Step ${closest + 1} of ${stops.length} · ${labels[closest]}`;
+    }
+
+    function bindAtlasPathTools() {
+      flowStage.querySelectorAll("[data-path-index]").forEach(button => button.addEventListener("click", () => {
+        const column = atlasColumns.querySelector(`[data-level="${button.dataset.pathIndex}"]`);
+        scrollAtlasTargetIntoView(column, "start");
+        column?.querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
+      }));
+      const copyButton = flowStage.querySelector("[data-copy-path]");
+      if (copyButton) copyButton.addEventListener("click", async () => {
+        const original = copyButton.textContent;
+        try {
+          await navigator.clipboard.writeText(location.href);
+        } catch {
+          const field = document.createElement("textarea");
+          field.value = location.href;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.opacity = "0";
+          document.body.append(field);
+          field.select();
+          document.execCommand("copy");
+          field.remove();
+        }
+        copyButton.textContent = "Copied";
+        const status = flowStage.querySelector("[data-copy-status]");
+        if (status) status.textContent = "Shareable path copied to the clipboard.";
+        setTimeout(() => { if (copyButton.isConnected) copyButton.textContent = original; }, 1600);
+      });
+      atlasScroll?.addEventListener("scroll", () => {
+        cancelAnimationFrame(atlasScrollFrame);
+        atlasScrollFrame = requestAnimationFrame(updateSwipeHint);
+      }, { passive: true });
+    }
+
     function renderAtlasMode() {
       const levels = getLevels();
       const path = selectedPath(levels);
+      const pathMarkup = usesEditorialAtlas()
+        ? `<div class="atlas-path-tools"><nav class="atlas-pathbar" aria-label="Current path">${path.map((label, index) => `<button class="atlas-path-step" type="button" data-path-index="${index}" aria-current="${index === path.length - 1 ? "location" : "false"}">${label}</button>`).join("")}</nav>${state.version === "b" ? `<button class="atlas-copy-path" type="button" data-copy-path>Copy path</button><span class="atlas-copy-status" data-copy-status aria-live="polite"></span>` : ""}</div>`
+        : `<nav class="atlas-pathbar" aria-label="Current path">${path.map((label, index) => `<span>${index === path.length - 1 ? `<strong>${label}</strong>` : label}</span>`).join("")}</nav>`;
       flowStage.innerHTML = `
-        <nav class="atlas-pathbar" aria-label="Current path">${path.map((label, index) => `<span>${index === path.length - 1 ? `<strong>${label}</strong>` : label}</span>`).join("")}</nav>
-        <div class="atlas-scroll" aria-label="Scrollable regulatory flowchart">
-          <div class="atlas-canvas" id="atlas-canvas">
-            <svg class="atlas-svg" id="atlas-svg" aria-hidden="true"></svg>
-            <div class="atlas-columns" id="atlas-columns"></div>
-            <aside class="atlas-detail" id="atlas-detail" aria-live="polite"></aside>
+        ${pathMarkup}
+        <div class="atlas-scroll-wrap">
+          ${usesEditorialAtlas() ? `<p class="atlas-swipe-hint"><strong data-swipe-step>Step 1 · Family</strong><span>Swipe to continue →</span></p>` : ""}
+          <div class="atlas-scroll" aria-label="Scrollable regulatory flowchart" tabindex="0">
+            <div class="atlas-canvas" id="atlas-canvas">
+              <svg class="atlas-svg" id="atlas-svg" aria-hidden="true"></svg>
+              <div class="atlas-columns" id="atlas-columns"></div>
+              <aside class="atlas-detail" id="atlas-detail" aria-live="polite" ${usesEditorialAtlas() ? `aria-labelledby="atlas-detail-title"` : ""}></aside>
+            </div>
           </div>
         </div>`;
+      atlasScroll = flowStage.querySelector(".atlas-scroll");
       atlasCanvas = flowStage.querySelector("#atlas-canvas");
       atlasColumns = flowStage.querySelector("#atlas-columns");
       atlasSvg = flowStage.querySelector("#atlas-svg");
       atlasDetail = flowStage.querySelector("#atlas-detail");
       renderColumns();
       renderDetail();
-      requestAnimationFrame(drawAtlas);
+      sizeVersionBAtlas();
+      bindAtlasPathTools();
+      requestAnimationFrame(() => {
+        drawAtlas();
+        updateSwipeHint();
+        const panKey = pendingPanKey;
+        pendingPanKey = null;
+        requestAnimationFrame(() => panVersionB(panKey));
+      });
     }
 
     function routeLevels() {
@@ -4311,6 +4881,7 @@
     }
 
     function drawAtlas() {
+      sizeVersionBAtlas();
       atlasSvg.replaceChildren();
       const columns = [...atlasColumns.querySelectorAll(".atlas-column")];
       for (let index = 0; index < columns.length - 1; index++) {
@@ -4321,14 +4892,13 @@
       const root = atlasCanvas.getBoundingClientRect();
       const node = endpoint.getBoundingClientRect();
       atlasDetail.style.left = `${node.right - root.left + 28}px`;
-      const desiredTop = node.top - root.top - 8;
-      const maxTop = Math.max(34, atlasCanvas.clientHeight - atlasDetail.offsetHeight - 18);
-      atlasDetail.style.top = `${Math.max(34, Math.min(desiredTop, maxTop))}px`;
+      atlasDetail.style.top = "34px";
       connect(endpoint, atlasDetail);
     }
 
     function parseHash() {
       const params = new URLSearchParams(location.hash.replace(/^#/, ""));
+      state.version = "c";
       const familyIndex = families.findIndex(family => family.id === params.get("family"));
       if (familyIndex >= 0) state.family = familyIndex;
       const subtypeIndex = families[state.family].items.findIndex(item => item.id === params.get("subtype"));
@@ -4354,6 +4924,8 @@
     function render() {
       normalizeEndpoint();
       document.body.dataset.layout = "atlas";
+      document.body.dataset.version = usesEditorialAtlas() ? "b" : "a";
+      document.body.dataset.atlasVariant = state.version;
       renderAtlasMode();
       syncHash();
     }
